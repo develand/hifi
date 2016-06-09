@@ -8,6 +8,8 @@
     "meteor-node-stubs": "~0.2.0",
     "react": "^15.1.0",
     "react-addons-pure-render-mixin": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "react-bootstrap": "^0.29.4",
+    "react-dom": "^15.1.0",
+    "react-intl": "^2.1.2"
   }
 }

@@ -2,7 +2,10 @@ import React, {Component, PropTypes} from 'react';
 import {createContainer} from 'meteor/react-meteor-data';
 import ReactDOM from 'react-dom';
 import Account from './Account.jsx';
-import {Accounts} from '../api/Accounts.js'
+import {Accounts} from '../api/Accounts.js';
+import {Grid} from 'react-bootstrap';
+import {IntlProvider} from 'react-intl';
+
  
 // App component - represents the whole app
 export default class App extends Component {
@@ -16,31 +19,46 @@ export default class App extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+    const accountNumber = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
 
-    Accounts.insert({text: text, createdAt: new Date()});
+    Accounts.insert({accountNumber: accountNumber, balance: 0, createdAt: new Date()});
 
     ReactDOM.findDOMNode(this.refs.textInput).value = '';
+  }
+
+  hideZeroBalanceAccounts() {
+
   }
  
   render() {
     return (
-      <div className="container">
-        <header>
-          <h1>Accounts</h1>
-          <form className="new-account" onSubmit={this.handleSubmit.bind(this)}>
-            <input 
-              type="text"
-              ref="textInput"
-              placeholder="Enter new accounts here"
-            />
-          </form>
-        </header>
- 
-        <ul>
-          {this.renderAccounts()}
-        </ul>
-      </div>
+      <IntlProvider locale="en">
+        <div className="container">
+          <header>
+            <h1>Accounts</h1>
+            <label className="hide-complated">
+              <input
+                type="checkbox"
+                readOnly
+                checked={this.props.hideZeroBalanceAccounts}
+                onClick={this.toggleHideZeroBalanceAccounts}
+              />
+              Hide Zero Balance Accounts
+            </label>
+            <form className="new-account" onSubmit={this.handleSubmit.bind(this)}>
+              <input 
+                type="text"
+                ref="textInput"
+                placeholder="Enter new accounts here"
+              />
+            </form>
+          </header>
+   
+          <Grid>
+            {this.renderAccounts()}
+          </Grid>
+        </div>
+      </IntlProvider>
     );
   }
 }
