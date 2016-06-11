@@ -1,19 +1,13 @@
-import React, { Component } from 'react';
- 
+import React, {Component, PropTypes} from 'react';
 import Account from './Account.jsx';
+import {Accounts} from "../api/accounts.js";
+import {createContainer} from 'meteor/react-meteor-data';
  
 // App component - represents the whole app
 export default class App extends Component {
-  getAccounts() {
-    return [
-      { _id: 1, text: 'C234223423' },
-      { _id: 2, text: 'C123123131' },
-      { _id: 3, text: 'C888234232' },
-    ];
-  }
- 
+
   renderAccounts() {
-    return this.getAccounts().map((account) => (
+    return this.props.accounts.map((account) => (
       <Account key={account._id} account={account} />
     ));
   }
@@ -32,3 +26,15 @@ export default class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  accounts: PropTypes.array.isRequired
+};
+
+export default createContainer(() => {
+  let accountList = Accounts.find({}).fetch();
+  console.log("List: " + accountList.length);
+  return {
+    accounts: accountList
+  }
+}, App);

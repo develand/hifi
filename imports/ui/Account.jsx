@@ -12,5 +12,5 @@ export default class Account extends Component {
 Account.propTypes = {
   // This component gets the task to display through a React prop.
   // We can use propTypes to indicate it is required
-  account: PropTypes.object.isRequired,
+  account: PropTypes.object.isRequired
 };
