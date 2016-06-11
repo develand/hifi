@@ -16,6 +16,17 @@ export default class App extends Component {
     ));
   }
 
+  renderAccountsHeader() {
+    return (
+      <Row>
+        <Col md={1}>Mark</Col>
+        <Col md={1}>Hide</Col>
+        <Col md={5}>Account #</Col>
+        <Col md={5}>Balance</Col>
+      </Row>
+    );
+  }
+
   handleSubmit(event) {
     event.preventDefault();
 
@@ -55,6 +66,7 @@ export default class App extends Component {
           </header>
    
           <Grid>
+            {this.renderAccountsHeader()}
             {this.renderAccounts()}
           </Grid>
         </div>
