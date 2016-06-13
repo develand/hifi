@@ -1,10 +1,48 @@
 import React, { Component, PropTypes } from 'react';
+import {Accounts} from '../api/Accounts.js'
+import {Row, Col} from 'react-bootstrap';
+import {FormattedNumber} from 'react-intl';
  
 // Task component - represents a single todo item
 export default class Account extends Component {
+
+  toggleChecked() {
+    Accounts.update(this.props.account._id, {
+      $set: {checked: !this.props.account.checked}
+    });
+  }
+
+  deleteThisAccount() {
+    Accounts.remove(this.props.account._id);
+  }
+
   render() {
+
+    const accountClassName = this.props.account.checked ? 'checked' : '';
+
     return (
-      <li>{this.props.account.text}</li>
+        <Row>
+          <Col md={1} xs={1}>
+            <button className="delete" onClick={this.deleteThisAccount.bind(this)}>
+              &times;
+            </button>
+          </Col>
+          <Col md={1} xs={1}>
+            <input
+              type="checkbox"
+              readOnly
+              checked={this.props.account.checked}
+              onClick={this.toggleChecked.bind(this)}
+            />
+          </Col>
+          <Col md={5} xs={5} className="accountNumber">{this.props.account.accountNumber}</Col>
+          <Col md={5} xs={5} className="balance">
+            <span className="pull-right">
+              <FormattedNumber style="currency" currency="USD" 
+                value={this.props.account.balance ? this.props.account.balance : 0.00}/>
+            </span>
+          </Col>
+        </Row>
     );
   }
 }
