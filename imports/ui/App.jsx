@@ -4,7 +4,7 @@ import {createContainer} from 'meteor/react-meteor-data';
 import ReactDOM from 'react-dom';
 import Account from './Account.jsx';
 import {Accounts} from '../api/Accounts.js';
-import {Grid} from 'react-bootstrap';
+import {Grid} from 'react-bo otstrap';
 import {IntlProvider} from 'react-intl';
 import {Row, Col} from 'react-bootstrap';
 
@@ -86,6 +86,7 @@ App.propTypes = {
 };
 
 export default createContainer(() => {
+  console.log("# accounts: " + Accounts.find({}).count());
   return {
     accounts: Accounts.find({}, {sort: {createdAt: -1}}).fetch()
   }

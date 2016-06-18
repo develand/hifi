@@ -2,7 +2,8 @@
   "name": "hifi",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "test": "meteor test --driver-package=practicalmeteor:mocha"
   },
   "dependencies": {
     "meteor-node-stubs": "~0.2.0",
@@ -14,6 +15,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.0.4",
+    "enzyme": "^2.3.0",
     "eslint": "^2.11.1",
     "eslint-plugin-react": "^5.1.1"
   }
