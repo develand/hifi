@@ -1,24 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import {Accounts} from '../api/Accounts.js'
+import {AccountsCollection} from '../api/AccountsCollection.js';
 import {Row, Col} from 'react-bootstrap';
 import {FormattedNumber} from 'react-intl';
- 
+
 // Task component - represents a single todo item
 export default class Account extends Component {
 
-  toggleChecked() {
-    Accounts.update(this.props.account._id, {
-      $set: {checked: !this.props.account.checked}
-    });
-  }
-
-  deleteThisAccount() {
-    Accounts.remove(this.props.account._id);
-  }
-
   render() {
-
-    const accountClassName = this.props.account.checked ? 'checked' : '';
+    // const accountClassName = this.props.account.checked ? 'checked' : '';
 
     return (
         <Row>
@@ -38,17 +27,27 @@ export default class Account extends Component {
           <Col md={5} xs={5} className="accountNumber">{this.props.account.accountNumber}</Col>
           <Col md={5} xs={5} className="balance">
             <span className="pull-right">
-              <FormattedNumber style="currency" currency="USD" 
+              <FormattedNumber style="currency" currency="USD"
                 value={this.props.account.balance ? this.props.account.balance : 0.00}/>
             </span>
           </Col>
         </Row>
     );
   }
+
+  deleteThisAccount() {
+    Accounts.remove(this.props.account._id);
+  }
+
+  toggleChecked() {
+    AccountsCollection.update(this.props.account._id, {
+      $set: {checked: !this.props.account.checked},
+    });
+  }
 }
- 
+
 Account.propTypes = {
   // This component gets the task to display through a React prop.
   // We can use propTypes to indicate it is required
-  account: PropTypes.object.isRequired
+  account: PropTypes.object.isRequired,
 };
