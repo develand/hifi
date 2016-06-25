@@ -23,7 +23,7 @@ if (Meteor.isServer) {
         assert.equal(AccountsCollection.find({accountNumber: 'XX1234'}).count(), 0);
       });
 
-      it('sill reject the creation of a duplicate Account Number', function() {
+      it('will reject the creation of a duplicate Account Number', function() {
         expect(function() {
           AccountsCollection.insert({
             accountNumber: 'XX1234',

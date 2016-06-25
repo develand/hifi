@@ -5,3 +5,5 @@ Factory.define('account', AccountsCollection, {
   balance: 100,
   createdAt: new Date(),
 });
+
+Factory.define('accounts')

@@ -27,14 +27,14 @@ export default class Accounts extends Component {
     return (
       <div className="accountList">
         <h1>Accounts</h1>
-        <label className="hide-completed">
+        <label className="hide-zero-balance-accounts">
           <input
           type="checkbox"
           readOnly
           checked={this.props.hideZeroBalanceAccounts}
           onClick={this.toggleHideZeroBalanceAccounts.bind(this)}
           />
-          Hide Zero Balance Accounts
+          &nbsp;Hide Zero Balance Accounts
         </label>
         <form className="new-account" onSubmit={this.handleSubmit.bind(this)}>
           <input

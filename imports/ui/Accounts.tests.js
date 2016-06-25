@@ -1,34 +1,38 @@
 import React from 'react';
 import {Meteor} from 'meteor/meteor';
-import {expect} from 'meteor/practicalmeteor:chai';
-import {shallow} from 'enzyme';
+import {expect,assert} from 'meteor/practicalmeteor:chai';
+import {shallow, mount} from 'enzyme';
 import Account from './Account.jsx';
-import {Row} from 'react-bootstrap';
+import Accounts from './Accounts.jsx';
+import {Grid, Row, Col} from 'react-bootstrap';
 import '../../factories/account.js';
 
 if (Meteor.isClient) {
-  describe('Account', () => {
+  describe('Account List', () => {
     describe('Look & Feel', function() {
-      it('uses an accountList class name', function() {
-        const wrapper = shallow(<div />);
-        expect(wrapper.hasClass('accountListx'));
+      let accountsElem = null;
+
+      beforeEach(() => {
+        const accounts = Factory('accounts')
+        accountsElem = mount(<Accounts />);
+      })
+
+      if('contains an accountList class', () => {
+        expect(accountsElem.find('accountsList').length);
       });
 
-      it('displays an account list header "Accounts"', function() {
-        const wrapper = shallow(<div />);
-        const h1 = wrapper.find('h1');
-        expect(h1.first().text()).to.equal('Accounts');
+      it('displays an account list H1 header labeled "Accounts"', function() {
+        expect(accountsElem.find('h1').at(0).text()).to.equal('Accounts');
       });
 
-      it('displays an account row', function() {
-        const account = Factory.build('account', {
-          accountNumber: 'XX1234',
-          balance: 100,
-          createdAt: new Date(),
-        });
-
-        const wrapper = shallow(<Account account={account} />);
-        expect(wrapper.find(Row)).to.have.length(1);
+      it('displays an accounts row header with the proper labels', function() {
+        const grid = accountsElem.find(Grid);
+        const headerRow = grid.find(Row).first();
+        const firstColumn = headerRow.find(Col).first();
+        expect(headerRow.find(Col).at(0).text()).to.equal("Del");
+        expect(headerRow.find(Col).at(1).text()).to.equal("Fil");
+        expect(headerRow.find(Col).at(2).text()).to.equal("Account #");
+        expect(headerRow.find(Col).at(3).text()).to.equal("Balance");
       });
     });
   });
