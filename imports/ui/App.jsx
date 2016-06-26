@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Accounts from './Accounts.jsx';
 import {IntlProvider} from 'react-intl';
 
-
 // App component - represents the whole app
 export default class App extends Component {
 
@@ -17,5 +16,4 @@ export default class App extends Component {
       </IntlProvider>
     );
   }
-
 }

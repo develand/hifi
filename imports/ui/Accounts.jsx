@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import {AccountsCollection} from '../api/AccountsCollection.js';
 import {Grid, Row, Col} from 'react-bootstrap';
 import {createContainer} from 'meteor/react-meteor-data';
+import Account from './Account.jsx';
 
 // Task component - represents a collection of Accounts
 export default class Accounts extends Component {
@@ -18,12 +20,14 @@ export default class Accounts extends Component {
   }
 
   renderAccounts() {
+    console.log("Num accounts: " + this.props.accounts.length);
     return this.props.accounts.map((account) => (
       <Account key={account._id} account={account} />
     ));
   }
 
   render() {
+    console.log("TOR Num accounts: " + this.props.accounts.length);
     return (
       <div className="accountList">
         <h1>Accounts</h1>
@@ -69,6 +73,7 @@ export default class Accounts extends Component {
 }
 
 export default createContainer(() => {
+  console.log('# Accounts: ' + AccountsCollection.find({}).count());
   return {
     accounts: AccountsCollection.find({}, {sort: {createdAt: -1}}).fetch(),
   };
