@@ -10,11 +10,6 @@ export default class Account extends Component {
     return (
         <Row>
           <Col md={1} xs={1}>
-            <button className="delete" onClick={this.deleteThisAccount.bind(this)}>
-              &times;
-            </button>
-          </Col>
-          <Col md={1} xs={1}>
             <input
               type="checkbox"
               readOnly
@@ -29,12 +24,17 @@ export default class Account extends Component {
                 value={this.props.account.balance ? this.props.account.balance : 0.00}/>
             </span>
           </Col>
+          <Col md={1} xs={1}>
+            <button className="delete" onClick={this.deleteThisAccount.bind(this)}>
+              &times;
+            </button>
+          </Col>
         </Row>
     );
   }
 
   deleteThisAccount() {
-    Accounts.remove(this.props.account._id);
+    AccountsCollection.remove(this.props.account._id);
   }
 
   toggleChecked() {

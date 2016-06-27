@@ -10,24 +10,22 @@ export default class Accounts extends Component {
 
   renderAccountsHeader() {
     return (
-      <Row>
-        <Col md={1} xs={1}>Del</Col>
-        <Col md={1} xs={1}>Fil</Col>
+      <Row className="accounts-header">
+        <Col md={1} xs={1}/>
         <Col md={5} xs={5}>Account #</Col>
         <Col md={5} xs={5}><span className="pull-right">Balance</span></Col>
+        <Col md={1} xs={1}>Delete</Col>
       </Row>
     );
   }
 
   renderAccounts() {
-    console.log("Num accounts: " + this.props.accounts.length);
     return this.props.accounts.map((account) => (
       <Account key={account._id} account={account} />
     ));
   }
 
   render() {
-    console.log("TOR Num accounts: " + this.props.accounts.length);
     return (
       <div className="accountList">
         <h1>Accounts</h1>
@@ -73,7 +71,6 @@ export default class Accounts extends Component {
 }
 
 export default createContainer(() => {
-  console.log('# Accounts: ' + AccountsCollection.find({}).count());
   return {
     accounts: AccountsCollection.find({}, {sort: {createdAt: -1}}).fetch(),
   };
