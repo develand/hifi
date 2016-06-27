@@ -2,10 +2,10 @@ import React from 'react';
 import {Meteor} from 'meteor/meteor';
 import {expect} from 'meteor/practicalmeteor:chai';
 import {mount} from 'enzyme';
-import Accounts from './Accounts.jsx';
+import Accounts from '../imports/ui/Accounts.jsx';
 import {Grid, Row, Col} from 'react-bootstrap';
 import {IntlProvider} from 'react-intl';
-import '../../factories/account.js';
+import '../factories/account.js';
 
 if (Meteor.isClient) {
   describe('Account List', () => {

@@ -1,6 +1,6 @@
 import {Meteor} from 'meteor/meteor';
 import {assert, expect} from 'meteor/practicalmeteor:chai';
-import {AccountsCollection} from './AccountsCollection.js';
+import {AccountsCollection} from '../imports/api/AccountsCollection.js';
 
 if (Meteor.isServer) {
   describe('Accounts', function() {

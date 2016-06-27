@@ -2,9 +2,9 @@ import React from 'react';
 import {Meteor} from 'meteor/meteor';
 import {expect} from 'meteor/practicalmeteor:chai';
 import {mount} from 'enzyme';
-import Account from './Account.jsx';
+import Account from '../imports/ui/Account.jsx';
 import {Col, Row} from 'react-bootstrap';
-import '../../factories/account.js';
+import '../factories/account.js';
 import {IntlProvider} from 'react-intl';
 
 if (Meteor.isClient) {
