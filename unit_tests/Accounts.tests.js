@@ -31,7 +31,6 @@ if (Meteor.isClient) {
         expect(headerRow.find(Col).at(0).text()).to.equal('');
         expect(headerRow.find(Col).at(1).text()).to.equal('Account #');
         expect(headerRow.find(Col).at(2).text()).to.equal('Balance');
-        expect(headerRow.find(Col).at(3).text()).to.equal('Delete');
       });
     });
   });

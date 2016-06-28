@@ -9,11 +9,9 @@ export default class App extends Component {
   render() {
     return (
       <IntlProvider locale="en">
-        <div className="container">
+        <div>
           <NavigationBar />
-          <header>
-            <Accounts />
-          </header>
+          <Accounts />
         </div>
       </IntlProvider>
     );

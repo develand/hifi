@@ -12,9 +12,8 @@ export default class Accounts extends Component {
     return (
       <Row className="accounts-header">
         <Col md={1} xs={1}/>
-        <Col md={5} xs={5}>Account #</Col>
+        <Col md={5} xs={6}>Account #</Col>
         <Col md={5} xs={5}><span className="pull-right">Balance</span></Col>
-        <Col md={1} xs={1}>Delete</Col>
       </Row>
     );
   }
@@ -27,17 +26,8 @@ export default class Accounts extends Component {
 
   render() {
     return (
-      <div className="accountList">
+      <div className="account-list">
         <h1>Accounts</h1>
-        <label className="hide-zero-balance-accounts">
-          <input
-          type="checkbox"
-          readOnly
-          checked={this.props.hideZeroBalanceAccounts}
-          onClick={this.toggleHideZeroBalanceAccounts.bind(this)}
-          />
-          &nbsp;Hide Zero Balance Accounts
-        </label>
         <form className="new-account" onSubmit={this.handleSubmit.bind(this)}>
           <input
             type="text"
@@ -58,14 +48,6 @@ export default class Accounts extends Component {
     const accountNumber = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
     AccountsCollection.insert({accountNumber: accountNumber, balance: 0, createdAt: new Date()});
     ReactDOM.findDOMNode(this.refs.textInput).value = '';
-  }
-
-  toggleHideZeroBalanceAccounts() {
-
-  }
-
-  hideZeroBalanceAccounts() {
-
   }
 
 }

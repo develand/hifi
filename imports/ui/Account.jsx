@@ -24,11 +24,6 @@ export default class Account extends Component {
                 value={this.props.account.balance ? this.props.account.balance : 0.00}/>
             </span>
           </Col>
-          <Col md={1} xs={1}>
-            <button className="delete" onClick={this.deleteThisAccount.bind(this)}>
-              &times;
-            </button>
-          </Col>
         </Row>
     );
   }
