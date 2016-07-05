@@ -52,9 +52,14 @@ export default class Accounts extends Component {
 
 }
 
-export default createContainer(() => {
+export default AccountsContainer = createContainer(() => {
+  const accountsHandle = Meteor.subscribe('accounts');
+  const isLoading = accountsHandle.ready();
+  const accountsExist = !isLoading;
+  const accounts = AccountsCollection.find({}, {sort: {createdAt: -1}}).fetch();
+
   return {
-    accounts: AccountsCollection.find({}, {sort: {createdAt: -1}}).fetch(),
+    accounts: accountsExist ? accounts : [],
   };
 }, Accounts);
 

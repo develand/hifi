@@ -5,4 +5,7 @@ export const AccountsCollection = new Mongo.Collection('accounts');
 
 if (Meteor.isServer) {
   AccountsCollection._ensureIndex({accountNumber: 1}, {unique: true});
+  Meteor.publish('accounts', function accountsPublication() {
+    return AccountsCollection.find();
+  });
 }
