@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import {AccountsCollection} from '../api/AccountsCollection.js';
+import {AccountsCollection} from '/collections/AccountsCollection.js';
 import {Row, Col} from 'react-bootstrap';
 import {FormattedNumber} from 'react-intl';
 

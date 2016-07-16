@@ -1,4 +1,4 @@
-import {AccountsCollection} from '../imports/api/AccountsCollection.js';
+import {AccountsCollection} from '/collections/AccountsCollection.js';
 
 Factory.define('account', AccountsCollection, {
   accountNumber: 'XX1234',

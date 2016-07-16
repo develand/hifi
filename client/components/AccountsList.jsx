@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-import {AccountsCollection} from '../api/AccountsCollection.js';
 import {Grid, Row, Col} from 'react-bootstrap';
 import {createContainer} from 'meteor/react-meteor-data';
+import {AccountsCollection} from '/collections/AccountsCollection';
 import Account from './Account.jsx';
 
 // Task component - represents a collection of Accounts
-export default class Accounts extends Component {
+export default class AccountsList extends Component {
 
   renderAccountsHeader() {
     return (
@@ -27,14 +27,6 @@ export default class Accounts extends Component {
   render() {
     return (
       <div className="account-list">
-        <h1>Accounts</h1>
-        <form className="new-account" onSubmit={this.handleSubmit.bind(this)}>
-          <input
-            type="text"
-            ref="textInput"
-            placeholder="Enter new accounts here"
-          />
-        </form>
         <Grid fluid >
           {this.renderAccountsHeader()}
           {this.renderAccounts()}
@@ -43,23 +35,15 @@ export default class Accounts extends Component {
     );
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    const accountNumber = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
-    AccountsCollection.insert({accountNumber: accountNumber, balance: 0, createdAt: new Date()});
-    ReactDOM.findDOMNode(this.refs.textInput).value = '';
-  }
-
 }
 
-export default AccountsContainer = createContainer(() => {
+export default AccountsDataContainer = createContainer(() => {
   const accountsHandle = Meteor.subscribe('accounts');
   const isLoading = accountsHandle.ready();
   const accountsExist = !isLoading;
-  const accounts = AccountsCollection.find({}, {sort: {createdAt: -1}}).fetch();
 
   return {
-    accounts: accountsExist ? accounts : [],
+    accounts: accountsExist ? AccountsCollection.find({}, {sort: {createdAt: -1}}).fetch() : [],
   };
 }, Accounts);
 

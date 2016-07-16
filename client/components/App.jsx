@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Accounts from './Accounts.jsx';
+import AccountsContainer from '../containers/AccountsContainer.jsx';
 import {IntlProvider} from 'react-intl';
 import NavigationBar from './NavigationBar.jsx';
 
@@ -11,7 +11,7 @@ export default class App extends Component {
       <IntlProvider locale="en">
         <div>
           <NavigationBar />
-          <Accounts />
+          <AccountsContainer />
         </div>
       </IntlProvider>
     );
