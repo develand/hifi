@@ -1,21 +1,22 @@
-import { composeWithTracker } from 'react-komposer';
-import { AccountsCollection } from '/collections/AccountsCollection.js';
-import { Accounts } from '/client/components/Accounts.jsx';
+import React, {Component} from 'react';
+import AccountsCollection from '/collections/AccountsCollection.js';
+import AccountsList from '/client/components/AccountsList.jsx';
+import AccountsQuickEntry from '/client/components/AccountsQuickEntry.jsx';
 
 export default class AccountsContainer extends Component {
 
-  handleAddAccount = (accountNumber) => {
-    AccountsCollection.insert({accountNumber: accountNumber, balance: 0, createdAt: new Date()});
-  }
-
   render() {
-    return(
+    return (
       <div>
         <h1>Accounts</h1>
-        <AccountsQuickEntry  onAddAccount={this.handleAddAccount.bind(this)}/>
+        <AccountsQuickEntry  onAddAccount={this.handleAddAccount.bind(this)} />
         <AccountsList />
       </div>
     );
   }
 
-};
+  handleAddAccount(accountNumber) {
+    AccountsCollection.insert({accountNumber: accountNumber, balance: 0, createdAt: new Date()});
+  }
+
+}

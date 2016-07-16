@@ -1,10 +1,8 @@
-
 import React from 'react';
 import {Meteor} from 'meteor/meteor';
 import {expect} from 'meteor/practicalmeteor:chai';
 import {mount} from 'enzyme';
 import AccountsList from './AccountsList.jsx';
-import Account from './Account.jsx';
 import {Grid, Row, Col} from 'react-bootstrap';
 import {IntlProvider} from 'react-intl';
 import '/factories/account.js';
@@ -16,15 +14,11 @@ if (Meteor.isClient) {
 
       beforeEach(() => {
         Factory.create('account');
-        accountsElem = mount(<IntlProvider locale="en"><AccountsList /></IntlProvider>);
+        accountsListElem = mount(<IntlProvider locale="en"><AccountsList /></IntlProvider>);
       });
 
       it('contains an accountList class', () => {
-        expect(accountsListElem.find('accountsList').length);
-      });
-
-      it('displays an account list H1 header labeled "Accounts"', function() {
-        expect(accountsListElem.find('h1').at(0).text()).to.equal('Accounts');
+        expect(accountsListElem.find(AccountsList).length);
       });
 
       it('displays an accounts row header with the proper labels', function() {

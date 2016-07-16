@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import {Grid, Row, Col} from 'react-bootstrap';
 import {createContainer} from 'meteor/react-meteor-data';
 import {AccountsCollection} from '/collections/AccountsCollection';
@@ -26,7 +25,7 @@ export default class AccountsList extends Component {
 
   render() {
     return (
-      <div className="account-list">
+      <div className="accounts-list">
         <Grid fluid >
           {this.renderAccountsHeader()}
           {this.renderAccounts()}
@@ -45,9 +44,9 @@ export default AccountsDataContainer = createContainer(() => {
   return {
     accounts: accountsExist ? AccountsCollection.find({}, {sort: {createdAt: -1}}).fetch() : [],
   };
-}, Accounts);
+}, AccountsList);
 
-Accounts.propTypes = {
+AccountsList.propTypes = {
   accounts: PropTypes.array.isRequired,
   hideZeroBalanceAccounts: PropTypes.bool,
 };

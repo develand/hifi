@@ -1,10 +1,8 @@
 import {Meteor} from 'meteor/meteor';
 import {assert, expect} from 'meteor/practicalmeteor:chai';
 import {AccountsCollection} from '/collections/AccountsCollection.js';
-import {Promise} from 'meteor/promise';
 
 if (Meteor.isServer) {
-
   const ACCOUNT_NUMBER = 'XX1234';
 
   describe('AccountsCollection', function() {
@@ -46,45 +44,41 @@ if (Meteor.isServer) {
   });
 
   describe('Account Assets', function() {
-      let account = null;
+    beforeEach(function() {
+      AccountsCollection.remove({});
+      AccountsCollection.insert({
+        accountNumber: ACCOUNT_NUMBER,
+        createdAt: new Date(),
+        balance: 100,
+        assets: [
+          {
+            symbol: 'IBM',
+            numUnits: 1000,
+            purchaseDate: '2015-01-01',
+            unitPrice: 150.00,
+          },
+          {
+            symbol: 'IBM',
+            numUnits: 1000,
+            purchaseDate: '2015-01-01',
+            unitPrice: 150.00,
+          },
+          {
+            symbol: 'APL',
+            numUnits: 200,
+            purchaseDate: '2015-06-01',
+            unitPrice: 65.00,
+          },
+        ],
 
-      beforeEach(function() {
-        console.log('before each');
-        AccountsCollection.remove({});
-        AccountsCollection.insert({
-          accountNumber: ACCOUNT_NUMBER,
-          createdAt: new Date(),
-          balance: 100,
-          assets: [
-            {
-              symbol : "IBM",
-              numUnits: 1000,
-              purchaseDate: "2015-01-01",
-              unitPrice: 150.00,
-            },
-            {
-              symbol : "IBM",
-              numUnits: 1000,
-              purchaseDate: "2015-01-01",
-              unitPrice: 150.00,
-            },
-            {
-              symbol : "APL",
-              numUnits: 200,
-              purchaseDate: "2015-06-01",
-              unitPrice: 65.00,
-            },
-          ],
-
-        });
       });
+    });
 
-      it('are saved and retrieved', () => {
-        const account = AccountsCollection.findOne({accountNumber: ACCOUNT_NUMBER});
-        expect(account).to.not.be.null;
-        console.log('an: ' + account);
-        assert.equal(account.accountNumber, ACCOUNT_NUMBER);
-        assert.equal(account.assets.length, 3)
-      });
+    it('are saved and retrieved', () => {
+      const account = AccountsCollection.findOne({accountNumber: ACCOUNT_NUMBER});
+      expect(account).to.not.be.null;
+      assert.equal(account.accountNumber, ACCOUNT_NUMBER);
+      assert.equal(account.assets.length, 3);
+    });
   });
 }
