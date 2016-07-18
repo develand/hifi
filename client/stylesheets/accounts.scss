@@ -1,20 +1,25 @@
-
-account-container {
-  max-width: 700px;
-  margin: 0 auto;
-  min-height: 100%;
+.accounts-container {
   background: white;
+  float: left;
+  max-width: 400px;
+  margin: 0 auto;
+  min-height: 400px;
+  padding: 6px;
 }
 
 .accounts-header {
   border-bottom: black solid 1px;
 }
 
-.account-list {
+.accounts-quick-entry {
+  width: 300px;
+  margin: 6px;
+}
+
+.accounts-list {
   background-color: #fff;
   margin: 2px;
   padding: 6px;
-  width: 300px;
 }
 
 .new-account {

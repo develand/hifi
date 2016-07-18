@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react';
+import ReactDOM from 'react-dom';
 
 export default class AccountsQuickEntry extends Component {
 
@@ -6,9 +7,10 @@ export default class AccountsQuickEntry extends Component {
     return (
       <form className="accounts-quick-entry" onSubmit={this.handleSubmit.bind(this)}>
         <input
+          size="30"
           type="text"
           ref="textInput"
-          placeholder="Enter new accounts here"
+          placeholder="Enter new account number here"
           onChange={this.handleSubmit.bind(this)}
         />
       </form>

@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import {Grid, Row, Col} from 'react-bootstrap';
-import {createContainer} from 'meteor/react-meteor-data';
-import {AccountsCollection} from '/collections/AccountsCollection';
 import Account from './Account.jsx';
 
 // Task component - represents a collection of Accounts
@@ -35,16 +33,6 @@ export default class AccountsList extends Component {
   }
 
 }
-
-export default AccountsDataContainer = createContainer(() => {
-  const accountsHandle = Meteor.subscribe('accounts');
-  const isLoading = accountsHandle.ready();
-  const accountsExist = !isLoading;
-
-  return {
-    accounts: accountsExist ? AccountsCollection.find({}, {sort: {createdAt: -1}}).fetch() : [],
-  };
-}, AccountsList);
 
 AccountsList.propTypes = {
   accounts: PropTypes.array.isRequired,
