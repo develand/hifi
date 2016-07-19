@@ -2,8 +2,8 @@ import React from 'react';
 import {Meteor} from 'meteor/meteor';
 import {expect} from 'meteor/practicalmeteor:chai';
 import {mount} from 'enzyme';
-import AccountsQuickEntry from './AccountsQuickEntry.jsx';
-import AccountsList from './AccountsList.jsx';
+import AccountsQuickEntry from '/client/components/AccountsQuickEntry.jsx';
+import AccountsList from '/client/components/AccountsList.jsx';
 import {IntlProvider} from 'react-intl';
 
 if (Meteor.isClient) {

@@ -2,7 +2,7 @@ import React from 'react';
 import {Meteor} from 'meteor/meteor';
 import {expect} from 'meteor/practicalmeteor:chai';
 import {mount} from 'enzyme';
-import AccountsList from './AccountsList.jsx';
+import AccountsList from '/client/components/AccountsList.jsx';
 import {Grid, Row, Col} from 'react-bootstrap';
 import {IntlProvider} from 'react-intl';
 import '/factories/account.js';
