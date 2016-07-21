@@ -11,7 +11,7 @@ export default class AccountsQuickEntry extends Component {
           type="text"
           ref="textInput"
           placeholder="Enter new account number here"
-          onChange={this.handleSubmit.bind(this)}
+          onSubmit={this.handleSubmit.bind(this)}
         />
       </form>
     );

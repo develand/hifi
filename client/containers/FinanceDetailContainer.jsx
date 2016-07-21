@@ -1,13 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { AccountsCollection } from '/collections/AccountsCollection.js';
+import {Panel, Tabs, Tab} from 'react-bootstrap';
 
 export class FinanceDetailContainer extends Component {
 
   render() {
     return (
-      <div className="finance-detail-container">
-      </div>
+      <Panel className="finance-detail-container">
+        <Tabs id="finance-detail-container">
+          <Tab className="finance-detail-tab" eventKey={1} title="Overview">
+            <h2>Overview</h2>
+          </Tab>
+          <Tab eventKey={2} title="Trends">Trends</Tab>
+        </Tabs>  
+      </Panel>
     );
   }
 

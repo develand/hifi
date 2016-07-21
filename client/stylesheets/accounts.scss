@@ -1,23 +1,22 @@
 .accounts-container {
-  background: white;
-  float: left;
-  max-width: 400px;
-  margin: 0 auto;
+  background-color: #eee;
+  height: 100%;
   min-height: 400px;
   padding: 6px;
 }
 
 .accounts-header {
+  background-color: #eee;
   border-bottom: black solid 1px;
 }
 
 .accounts-quick-entry {
-  width: 300px;
   margin: 6px;
+  width: 300px;
 }
 
 .accounts-list {
-  background-color: #fff;
+  background-color: #eee;
   margin: 2px;
   padding: 6px;
 }

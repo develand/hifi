@@ -3,16 +3,17 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { AccountsCollection } from '/collections/AccountsCollection.js';
 import AccountsList from '/client/components/AccountsList.jsx';
 import AccountsQuickEntry from '/client/components/AccountsQuickEntry.jsx';
+import {Panel} from 'react-bootstrap';
 
 export class AccountsContainer extends Component {
 
   render() {
     return (
-      <div className="accounts-container">
+      <Panel className="accounts-container">
         <h1>Accounts</h1>
         <AccountsQuickEntry  onAddAccount={this.handleAddAccount.bind(this)} />
         <AccountsList accounts={this.props.accounts}/>
-      </div>
+      </Panel>
     );
   }
 
@@ -26,11 +27,18 @@ AccountsContainer.propTypes = {
 };
 
 export default AccountsDataContainer = createContainer(() => {
-  const accountsHandle = Meteor.subscribe('accounts');
-  const isLoading = accountsHandle.ready();
-  const accountsExist = !isLoading;
-
-  return {
-    accounts: accountsExist ? AccountsCollection.find({}, {sort: {createdAt: -1}}).fetch() : [],
-  };
+  if (Meteor.subscribe('accounts').ready()) {
+    console.log("Accounts client length: " + AccountsCollection.find({}).count());
+    return {
+      accounts: AccountsCollection.find({}, {sort: {createdAt: -1}}).fetch(),
+    };
+  } else {
+    console.log('Accounts collection not ready...');
+    return {
+      accounts: [],
+    };
+  }
 }, AccountsContainer);
+
+
+
