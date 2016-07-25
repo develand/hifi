@@ -1,7 +1,7 @@
 .accounts-container {
   background-color: #eee;
   height: 100%;
-  min-height: 400px;
+  min-height: 500px;
   padding: 6px;
 }
 
@@ -24,4 +24,8 @@
 .new-account {
   margin-bottom: 4px;
   margin-top: 0px;
+}
+
+.delete {
+  text-align: center;
 }

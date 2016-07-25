@@ -17,28 +17,31 @@ export default class Account extends Component {
               onClick={this.toggleChecked.bind(this)}
             />
           </Col>
-          <Col md={5} xs={5} className="accountNumber">{this.props.account.accountNumber}</Col>
-          <Col md={5} xs={5} className="balance">
+          <Col md={4} xs={4} className="accountNumber">{this.props.account.accountNumber}</Col>
+          <Col md={4} xs={4} className="balance">
             <span className="pull-right">
               <FormattedNumber style="currency" currency="USD"
                 value={this.props.account.balance ? this.props.account.balance : 0.00}/>
             </span>
+          </Col>
+          <Col md={1} xs={1}>
+            <button className="delete">&times;</button>
           </Col>
         </Row>
     );
   }
 
   deleteThisAccount() {
-    AccountsCollection.remove(this.props.account._id);
+    this.props.onDeleteAccount();
   }
 
   toggleChecked() {
-    AccountsCollection.update(this.props.account._id, {
-      $set: {checked: !this.props.account.checked},
-    });
+    onSelectAccount(this.props.account.checked);
   }
 }
 
 Account.propTypes = {
   account: PropTypes.object.isRequired,
+  onDeleteAccount: PropTypes.func.isRequired,
+  onSelectAccount: PropTypes.func.isRequired,
 };

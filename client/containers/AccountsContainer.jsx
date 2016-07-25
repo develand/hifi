@@ -7,18 +7,45 @@ import {Panel} from 'react-bootstrap';
 
 export class AccountsContainer extends Component {
 
+  /***
+  * Renders the display of a single account
+  ***/
   render() {
     return (
       <Panel className="accounts-container">
         <h1>Accounts</h1>
-        <AccountsQuickEntry  onAddAccount={this.handleAddAccount.bind(this)} />
-        <AccountsList accounts={this.props.accounts}/>
+        <AccountsQuickEntry  
+          onAddAccount={this.handleAddAccount.bind(this)} 
+        />
+        <AccountsList accounts={this.props.accounts}
+          onDeleteAccount={this.handleDeleteAccount.bind(this)} 
+          onSelectAccount={this.handleSelectAccount.bind(this)} 
+        />
       </Panel>
     );
   }
 
+  /***
+  * Adds a new account
+  ***/
   handleAddAccount(accountNumber) {
     AccountsCollection.insert({accountNumber: accountNumber, balance: 0, createdAt: new Date()});
+  }
+
+  /***
+  * Deletes an account based on account id
+  ***/
+  handleDeleteAccount(id) {
+    AccountsCollection.remove(id);
+  }
+
+  /***
+  * Toggles the selection of an account
+  ***/
+  handleSelectAccount(id, checked) {
+    AccountsCollection.update(id, {
+      $set: {selected: !checked},
+    });
   }
 }
 

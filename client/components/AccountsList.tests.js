@@ -51,8 +51,9 @@ if (Meteor.isClient) {
       it('displays an accounts row header with the proper labels', function() {
         const headerRow = grid.find(Row).first();
         expect(headerRow.find(Col).at(0).text()).to.equal('');
-        expect(headerRow.find(Col).at(1).text()).to.equal('Account #');
+        expect(headerRow.find(Col).at(1).text()).to.equal('Account');
         expect(headerRow.find(Col).at(2).text()).to.equal('Balance');
+        expect(headerRow.find(Col).at(3).text()).to.equal('');
       });
 
       it('expects rows for header and account data', function() {

@@ -23,7 +23,7 @@ if (Meteor.isClient) {
 
       it('displays four columns', () => {
         const rowElem = accountElem.find(Row);
-        expect(rowElem.find(Col)).to.have.length(3);
+        expect(rowElem.find(Col)).to.have.length(4);
       });
     });
   });
