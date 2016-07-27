@@ -1,0 +1,28 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/Users/dougeveland/.meteor/packages/meteor-tool/1.3.5_1/mt-os.osx.x86_64/dev_bundle/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'test-watch' ]
+2 info using npm@3.10.5
+3 info using node@v0.10.46
+4 verbose node symlink /Users/dougeveland/.meteor/packages/meteor-tool/1.3.5_1/mt-os.osx.x86_64/dev_bundle/bin/node
+5 verbose stack Error: missing script: test-watch
+5 verbose stack     at run (/Users/dougeveland/.meteor/packages/meteor-tool/.1.3.5_1.1xk5b10++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/lib/node_modules/npm/lib/run-script.js:151:19)
+5 verbose stack     at /Users/dougeveland/.meteor/packages/meteor-tool/.1.3.5_1.1xk5b10++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/lib/node_modules/npm/lib/run-script.js:61:5
+5 verbose stack     at /Users/dougeveland/.meteor/packages/meteor-tool/.1.3.5_1.1xk5b10++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/lib/node_modules/npm/node_modules/read-package-json/read-json.js:356:5
+5 verbose stack     at checkBinReferences_ (/Users/dougeveland/.meteor/packages/meteor-tool/.1.3.5_1.1xk5b10++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/lib/node_modules/npm/node_modules/read-package-json/read-json.js:320:45)
+5 verbose stack     at final (/Users/dougeveland/.meteor/packages/meteor-tool/.1.3.5_1.1xk5b10++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/lib/node_modules/npm/node_modules/read-package-json/read-json.js:354:3)
+5 verbose stack     at then (/Users/dougeveland/.meteor/packages/meteor-tool/.1.3.5_1.1xk5b10++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/lib/node_modules/npm/node_modules/read-package-json/read-json.js:124:5)
+5 verbose stack     at /Users/dougeveland/.meteor/packages/meteor-tool/.1.3.5_1.1xk5b10++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/lib/node_modules/npm/node_modules/read-package-json/read-json.js:311:12
+5 verbose stack     at /Users/dougeveland/.meteor/packages/meteor-tool/.1.3.5_1.1xk5b10++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:78:16
+5 verbose stack     at fs.js:272:14
+5 verbose stack     at /Users/dougeveland/.meteor/packages/meteor-tool/.1.3.5_1.1xk5b10++os.osx.x86_64+web.browser+web.cordova/mt-os.osx.x86_64/dev_bundle/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:43:10
+6 verbose cwd /Users/dougeveland/Src/hifi
+7 error Darwin 15.5.0
+8 error argv "node" "/Users/dougeveland/.meteor/packages/meteor-tool/1.3.5_1/mt-os.osx.x86_64/dev_bundle/bin/npm" "run" "test-watch"
+9 error node v0.10.46
+10 error npm  v3.10.5
+11 error missing script: test-watch
+12 error If you need help, you may report this error at:
+12 error     <https://github.com/npm/npm/issues>
+13 verbose exit [ 1, true ]

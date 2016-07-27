@@ -25,18 +25,19 @@ export default class Account extends Component {
             </span>
           </Col>
           <Col md={1} xs={1}>
-            <button className="delete">&times;</button>
+            <button onClick={this.deleteThisAccount.bind(this)} className="delete">&times;</button>
           </Col>
         </Row>
     );
   }
 
   deleteThisAccount() {
-    this.props.onDeleteAccount();
+    console.log("calling delete with: " + this.props.account._id);
+    this.props.onDeleteAccount(this.props.account._id);
   }
 
   toggleChecked() {
-    onSelectAccount(this.props.account.checked);
+    this.props.onSelectAccount(this.props.account.checked);
   }
 }
 

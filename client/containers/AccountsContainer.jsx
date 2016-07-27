@@ -57,7 +57,7 @@ export default AccountsDataContainer = createContainer(() => {
   if (Meteor.subscribe('accounts').ready()) {
     console.log("Accounts client length: " + AccountsCollection.find({}).count());
     return {
-      accounts: AccountsCollection.find({}, {sort: {createdAt: -1}}).fetch(),
+      accounts: AccountsCollection.find({}, {sort: {accountNumber: 1}}).fetch(),
     };
   } else {
     console.log('Accounts collection not ready...');

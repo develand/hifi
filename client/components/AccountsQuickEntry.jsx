@@ -16,7 +16,6 @@ export default class AccountsQuickEntry extends Component {
           size="10"
           type="text"
           ref="textInput"
-          onSubmit={this.handleSubmit.bind(this)}
         />
       </form>
     );
