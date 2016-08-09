@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { AccountsCollection } from '/collections/AccountsCollection.js';
-import AccountsList from '/client/components/AccountsList.jsx';
-import AccountsQuickEntry from '/client/components/AccountsQuickEntry.jsx';
+import AccountsList from '/imports/ui/components/AccountsList.jsx';
+import AccountsQuickEntry from '/imports/ui/components/AccountsQuickEntry.jsx';
 import {Panel} from 'react-bootstrap';
 
 export class AccountsContainer extends Component {
@@ -29,7 +29,8 @@ export class AccountsContainer extends Component {
   * Adds a new account
   ***/
   handleAddAccount(accountNumber) {
-    AccountsCollection.insert({accountNumber: accountNumber, balance: 0, createdAt: new Date()});
+    console.log("adding account in container: " + accountNumber);
+    AccountsCollection.insert({accountNumber: accountNumber, balance: 200, createdAt: new Date()});
   }
 
   /***

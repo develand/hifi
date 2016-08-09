@@ -3,9 +3,9 @@ import {Meteor} from 'meteor/meteor';
 import {expect} from 'meteor/practicalmeteor:chai';
 import {sinon} from 'meteor/practicalmeteor:sinon';
 import {shallow, mount} from 'enzyme';
-import AccountsQuickEntry from '/client/components/AccountsQuickEntry.jsx';
-import {handleSubmit} from '/client/components/AccountsQuickEntry.jsx';
-import AccountsList from '/client/components/AccountsList.jsx';
+import AccountsQuickEntry from '/imports/ui/components/AccountsQuickEntry.jsx';
+import {handleSubmit} from '/imports/ui/components/AccountsQuickEntry.jsx';
+import AccountsList from '/imports/ui/components/AccountsList.jsx';
 import {IntlProvider} from 'react-intl';
 
 if (Meteor.isClient) {

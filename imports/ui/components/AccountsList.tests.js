@@ -3,7 +3,7 @@ import {Meteor} from 'meteor/meteor';
 import {expect} from 'meteor/practicalmeteor:chai';
 import {sinon} from 'meteor/practicalmeteor:sinon';
 import {mount} from 'enzyme';
-import AccountsList from '/client/components/AccountsList.jsx';
+import AccountsList from '/imports/ui/components/AccountsList.jsx';
 import {Grid, Row, Col} from 'react-bootstrap';
 import {IntlProvider} from 'react-intl';
 import '/factories/account.js';
@@ -71,6 +71,7 @@ if (Meteor.isClient) {
           expect(grid.find(Row).at(2).find(Col).at(1).text()).to.equal('XX456');
           expect(grid.find(Row).at(3).find(Col).at(1).text()).to.equal('XX789');
         });
+
       });
 
     });

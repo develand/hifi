@@ -2,7 +2,7 @@ import React from 'react';
 import {Meteor} from 'meteor/meteor';
 import {expect} from 'meteor/practicalmeteor:chai';
 import {mount} from 'enzyme';
-import Navigationbar from '/client/components/NavigationBar.jsx';
+import Navigationbar from '/imports/ui/components/NavigationBar.jsx';
 import {NavItem} from 'react-bootstrap';
 
 if (Meteor.isClient) {

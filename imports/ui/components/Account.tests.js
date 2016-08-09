@@ -3,7 +3,7 @@ import {Meteor} from 'meteor/meteor';
 import {expect} from 'meteor/practicalmeteor:chai';
 import {sinon} from 'meteor/practicalmeteor:sinon';
 import {mount} from 'enzyme';
-import Account from '/client/components/Account.jsx';
+import Account from '/imports/ui/components/Account.jsx';
 import {Col, Row} from 'react-bootstrap';
 import '/factories/account.js';
 import {IntlProvider} from 'react-intl';
@@ -37,18 +37,10 @@ if (Meteor.isClient) {
     });
 
     describe("Account Actions", () => {
-      it('calls onDeleteAccount when the delete "x" is called', () => {
-        const buttonElem = accountElem.find('button').first();
-        console.log("account props id: " + accountElem.props._id);
-        buttonElem.simulate('click');
-        console.log("account id: " + account._id);
-        expect(onDeleteAccount.alwaysCalledWith(account._id)).to.equal(true);
-      });
-
       it('passes the account primary key to onDeleteAccount', () => {
         const buttonElem = accountElem.find('button').first();
         buttonElem.simulate('click');
-        expect(onDeleteAccount.calledOnce).to.equal(true);
+        expect(onDeleteAccount.alwaysCalledWith(account._id)).to.equal(true);
       });
 
       it('calls onSelectAccount when the select checkbox is clicked', () => {

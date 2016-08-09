@@ -16,6 +16,10 @@ if (Meteor.isServer) {
         });
       });
 
+      afterEach(function() {
+        AccountsCollection.remove({accountNumber: ACCOUNT_NUMBER});
+      });
+
       it('creates a single valid account', function() {
         assert.equal(AccountsCollection.find({}).count(), 1);
       });
@@ -37,8 +41,8 @@ if (Meteor.isServer) {
             createdAt: new Date(),
             balance: 100,
           });
-        }).to.throw('insertDocument :: caused by :: 11000 E11000 duplicate key error index: ' +
-          'meteor.accounts.$accountNumber_1  dup key: { : "XX1234" }');
+        }).to.throw('E11000 duplicate key error collection: meteor.accounts index: ' + 
+          'accountNumber_1 dup key: { : "XX1234" }');
       });
     });
   });
@@ -74,11 +78,16 @@ if (Meteor.isServer) {
       });
     });
 
+    afterEach(function() {
+      AccountsCollection.remove({accountNumber: ACCOUNT_NUMBER});
+    });
+
     it('are saved and retrieved', () => {
       const account = AccountsCollection.findOne({accountNumber: ACCOUNT_NUMBER});
       expect(account).to.not.be.null;
       assert.equal(account.accountNumber, ACCOUNT_NUMBER);
       assert.equal(account.assets.length, 3);
     });
+
   });
 }

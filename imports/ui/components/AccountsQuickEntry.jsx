@@ -30,6 +30,7 @@ export default class AccountsQuickEntry extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const accountNumber = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+    console.log("submit account #: " + accountNumber);
     this.props.onAddAccount(accountNumber);
     ReactDOM.findDOMNode(this.refs.textInput).value = '';
   }
