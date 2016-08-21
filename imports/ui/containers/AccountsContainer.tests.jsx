@@ -12,6 +12,7 @@ import TestUtils from 'react-addons-test-utils';
 import '/factories/account.js';
 
 if (Meteor.isClient) {
+  
   describe('Accounts Container', () => {
     const ACCOUNT_NUMBER = 'XX1234';
     const NEW_ACCOUNT_NUMBER = 'NewAccount';
@@ -19,8 +20,14 @@ if (Meteor.isClient) {
     let accountsContainerElem = null;
 
     beforeEach(() => {
-      Factory.create('account');
-      accounts = AccountsCollection.find({});
+      const accounts = [
+        {
+          _id: 1,
+          accountNumber: ACCOUNT_NUMBER,
+          balance: 100,
+          createdAt: new Date(),
+        },
+      ];
       accountsContainerElem =
         mount(<IntlProvider locale="en"><AccountsContainer accounts={accounts}/></IntlProvider>);
     });
@@ -54,6 +61,28 @@ if (Meteor.isClient) {
           const accountsListElem = accountsContainerElem.find('AccountsList').first();   
           expect(accountsListElem.find(Account)).to.have.length(2);       
         });
+      });
+
+      it('changes an accounts "selected" attribute to true when its checkbox is checked', () => {
+          const accountsListElem = accountsContainerElem.find('AccountsList').first();   
+          const grid = accountsListElem.find(Grid);
+          checkElem = grid.find(Row).at(0)
+          checkElem.simulate('click', () => {
+            const account = AccountsCollection.find({accountNumber: ACCOUNT_NUMBER});
+            expect(account.selected).to.equal(true);
+          });
+      });
+
+      it('changes an accounts "selected" attribute back to false when clicked twice', () => {
+          const accountsListElem = accountsContainerElem.find('AccountsList').first();   
+          const grid = accountsListElem.find(Grid);
+          checkElem = grid.find(Row).at(0)
+          checkElem.simulate('click', () => {
+            checkElem.simulate('click', () => {
+              const account = AccountsCollection.find({accountNumber: ACCOUNT_NUMBER});
+              expect(account.selected).to.equal(false);
+            });
+          });
       });
     });
   });

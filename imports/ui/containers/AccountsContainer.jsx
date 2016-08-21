@@ -5,7 +5,7 @@ import AccountsList from '/imports/ui/components/AccountsList.jsx';
 import AccountsQuickEntry from '/imports/ui/components/AccountsQuickEntry.jsx';
 import {Panel} from 'react-bootstrap';
 
-export class AccountsContainer extends Component {
+export default class AccountsContainer extends Component {
 
   /***
   * Renders the display of a single account
@@ -54,19 +54,19 @@ AccountsContainer.propTypes = {
   accounts: PropTypes.array.isRequired,
 };
 
-export default AccountsDataContainer = createContainer(() => {
-  if (Meteor.subscribe('accounts').ready()) {
-    console.log("Accounts client length: " + AccountsCollection.find({}).count());
-    return {
-      accounts: AccountsCollection.find({}, {sort: {accountNumber: 1}}).fetch(),
-    };
-  } else {
-    console.log('Accounts collection not ready...');
-    return {
-      accounts: [],
-    };
-  }
-}, AccountsContainer);
+// export default AccountsDataContainer = createContainer(() => {
+//   if (Meteor.subscribe('accounts').ready()) {
+//     console.log("Accounts client length: " + AccountsCollection.find({}).count());
+//     return {
+//       accounts: AccountsCollection.find({}, {sort: {accountNumber: 1}}).fetch(),
+//     };
+//   } else {
+//     console.log('Accounts collection not ready...');
+//     return {
+//       accounts: [],
+//     };
+//   }
+// }, AccountsContainer);
 
 
 

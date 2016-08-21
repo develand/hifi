@@ -72,8 +72,13 @@ if (Meteor.isClient) {
           expect(grid.find(Row).at(3).find(Col).at(1).text()).to.equal('XX789');
         });
 
+        it('calls onSelectAccount when an account is selected', function() {
+          checkElem = grid.find(Row).at(0)
+          checkElem.simulate('click', () => {
+            expect(onSelectAccount.calledOnce).to.equal(true);
+          });
+        });
       });
-
     });
   });
 }

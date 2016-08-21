@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { AccountsCollection } from '/collections/AccountsCollection.js';
-import {Panel, Tabs, Tab} from 'react-bootstrap';
+import {Panel, Tabs, Tab} from 'react-bootstrap'; 
+import AccountOverview from '../components/AccountOverview.jsx'
 
-export class FinanceDetailContainer extends Component {
+export default class FinanceDetailContainer extends Component {
 
   render() {
     return (
@@ -11,6 +12,7 @@ export class FinanceDetailContainer extends Component {
         <Tabs id="finance-detail-container">
           <Tab className="finance-detail-tab" eventKey={1} title="Overview">
             <h2>Overview</h2>
+            <AccountOverview accounts={this.props.accounts} />
           </Tab>
           <Tab eventKey={2} title="Trends">Trends</Tab>
         </Tabs>  
@@ -24,14 +26,15 @@ export class FinanceDetailContainer extends Component {
 }
 
 FinanceDetailContainer.propTypes = {
+  accounts: PropTypes.array.isRequired,
 };
 
-export default AccountsDataContainer = createContainer(() => {
-  const accountsHandle = Meteor.subscribe('accounts');
-  const isLoading = accountsHandle.ready();
-  const accountsExist = !isLoading;
+// export default AccountsDataContainer = createContainer(() => {
+//   const accountsHandle = Meteor.subscribe('accounts');
+//   const isLoading = accountsHandle.ready();
+//   const accountsExist = !isLoading;
 
-  return {
-    accounts: accountsExist ? AccountsCollection.find({}, {sort: {createdAt: -1}}).fetch() : [],
-  };
-}, FinanceDetailContainer);
+//   return {
+//     accounts: accountsExist ? AccountsCollection.find({}, {sort: {createdAt: -1}}).fetch() : [],
+//   };
+// }, FinanceDetailContainer);

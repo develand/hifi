@@ -37,6 +37,7 @@ export default class Account extends Component {
   }
 
   toggleChecked() {
+    console.log("checked");
     this.props.onSelectAccount(this.props.account.checked);
   }
 }
