@@ -1,13 +1,14 @@
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
-/***
+
+/**
 * UI Component for handling the entry of an account number
-***/
+**/
 export default class AccountsQuickEntry extends Component {
 
-  /***
+  /**
   * Renders component
-  ***/
+  **/
   render() {
     return (
       <form className="accounts-quick-entry" onSubmit={this.handleSubmit.bind(this)}>
@@ -30,7 +31,6 @@ export default class AccountsQuickEntry extends Component {
   handleSubmit(event) {
     event.preventDefault();
     const accountNumber = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
-    console.log("submit account #: " + accountNumber);
     this.props.onAddAccount(accountNumber);
     ReactDOM.findDOMNode(this.refs.textInput).value = '';
   }

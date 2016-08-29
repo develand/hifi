@@ -40,7 +40,7 @@ if (Meteor.isClient) {
         ];
         accountsListElem = mount(
           <IntlProvider locale="en">
-            <AccountsList accounts={accounts} 
+            <AccountsList accounts={accounts}
               onDeleteAccount={onDeleteAccount} onSelectAccount={onSelectAccount} />
           </IntlProvider>
         );
@@ -49,7 +49,6 @@ if (Meteor.isClient) {
       });
 
       describe('Account List Grid', () => {
-
         it('contains an accountList class', () => {
           expect(accountsListElem.find(AccountsList).length);
         });
@@ -66,14 +65,15 @@ if (Meteor.isClient) {
           expect(grid.find(Row)).to.have.length(1 + accounts.length);
         });
 
-        it('expects accounts to be ordered in the order they are placed in the accounts array', function() {
-          expect(grid.find(Row).at(1).find(Col).at(1).text()).to.equal('XX123');
-          expect(grid.find(Row).at(2).find(Col).at(1).text()).to.equal('XX456');
-          expect(grid.find(Row).at(3).find(Col).at(1).text()).to.equal('XX789');
-        });
+        it('expects accounts to be ordered in the order they are placed in the accounts array',
+          function() {
+            expect(grid.find(Row).at(1).find(Col).at(1).text()).to.equal('XX123');
+            expect(grid.find(Row).at(2).find(Col).at(1).text()).to.equal('XX456');
+            expect(grid.find(Row).at(3).find(Col).at(1).text()).to.equal('XX789');
+          });
 
         it('calls onSelectAccount when an account is selected', function() {
-          checkElem = grid.find(Row).at(0)
+          checkElem = grid.find(Row).at(0);
           checkElem.simulate('click', () => {
             expect(onSelectAccount.calledOnce).to.equal(true);
           });

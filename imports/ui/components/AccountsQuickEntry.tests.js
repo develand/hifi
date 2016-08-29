@@ -2,10 +2,8 @@ import React from 'react';
 import {Meteor} from 'meteor/meteor';
 import {expect} from 'meteor/practicalmeteor:chai';
 import {sinon} from 'meteor/practicalmeteor:sinon';
-import {shallow, mount} from 'enzyme';
+import {mount} from 'enzyme';
 import AccountsQuickEntry from '/imports/ui/components/AccountsQuickEntry.jsx';
-import {handleSubmit} from '/imports/ui/components/AccountsQuickEntry.jsx';
-import AccountsList from '/imports/ui/components/AccountsList.jsx';
 import {IntlProvider} from 'react-intl';
 
 if (Meteor.isClient) {
@@ -20,7 +18,7 @@ if (Meteor.isClient) {
           <IntlProvider locale="en">
               <AccountsQuickEntry onAddAccount={onAddAccount} />
           </IntlProvider>
-        );        
+        );
       });
 
       it('contains an accounts quick entry element', () => {
@@ -34,14 +32,12 @@ if (Meteor.isClient) {
 
       it('should capture the account number and pass it to the parent', () => {
         accountsQuickEntryElem.find('input').get(0).value = '123.45';
-        console.log('Value: ' + accountsQuickEntryElem.find('input').get(0).value);
         accountsQuickEntryElem.find('form').simulate('submit');
         expect(onAddAccount.alwaysCalledWith('123.45')).to.equal(true);
       });
 
-      it("should trim the account number before passing it on", () => {
+      it('should trim the account number before passing it on', () => {
         accountsQuickEntryElem.find('input').get(0).value = '  123.45  ';
-        console.log('Value: ' + accountsQuickEntryElem.find('input').get(0).value);
         accountsQuickEntryElem.find('form').simulate('submit');
         expect(onAddAccount.alwaysCalledWith('123.45')).to.equal(true);
       });

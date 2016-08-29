@@ -11,14 +11,14 @@ export default class AccountsList extends Component {
         <Col md={1} xs={1}/>
         <Col md={4} xs={4}>Account</Col>
         <Col md={4} xs={4}><span className="pull-right">Balance</span></Col>
-        <Col md={1} xs={1}></Col>
+        <Col md={1} xs={1}/>
       </Row>
     );
   }
 
   renderAccounts() {
     return this.props.accounts.map((account) => (
-      <Account key={account._id} account={account} 
+      <Account key={account._id} account={account}
         onDeleteAccount={this.props.onDeleteAccount}
         onSelectAccount={this.props.onSelectAccount}
       />

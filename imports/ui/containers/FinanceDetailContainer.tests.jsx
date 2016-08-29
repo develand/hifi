@@ -3,14 +3,12 @@ import {Meteor} from 'meteor/meteor';
 import {expect} from 'meteor/practicalmeteor:chai';
 import {mount} from 'enzyme';
 import {Tabs, Tab} from 'react-bootstrap';
-import {AccountsCollection} from '/collections/AccountsCollection.js';
 import FinanceDetailContainer from './FinanceDetailContainer.jsx';
 import {IntlProvider} from 'react-intl';
 
 if (Meteor.isClient) {
-
-  const ACCOUNT_NUMBER_1 = "AAAAAA";
-  const ACCOUNT_NUMBER_2 = "BBBBBB"
+  const ACCOUNT_NUMBER_1 = 'AAAAAA';
+  const ACCOUNT_NUMBER_2 = 'BBBBBB';
 
   describe('Finance Detail Container', () => {
     describe('Look & Feel', () => {
@@ -29,11 +27,15 @@ if (Meteor.isClient) {
             accountNumber: ACCOUNT_NUMBER_2,
             balance: 200,
             createdAt: new Date(),
-          }
+          },
         ];
 
         financeDetailContainerElem =
-          mount(<IntlProvider locale="en"><FinanceDetailContainer accounts={accounts}/></IntlProvider>);
+          mount(
+            <IntlProvider locale="en">
+              <FinanceDetailContainer accounts={accounts}/>
+            </IntlProvider>
+          );
         tabs = financeDetailContainerElem.find(Tabs);
       });
 
