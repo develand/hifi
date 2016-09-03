@@ -9,8 +9,6 @@ if (Meteor.isServer) {
 
   // Publish all accounts
   Meteor.publish('accounts', function accountsPublication() {
-    const accounts = AccountsCollection.find({});
-    console.log("Lengths: " + accounts.fetch().length);
     return AccountsCollection.find({});
   });
 }

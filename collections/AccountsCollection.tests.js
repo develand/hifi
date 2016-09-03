@@ -2,9 +2,9 @@ import {Meteor} from 'meteor/meteor';
 import {assert, expect} from 'meteor/practicalmeteor:chai';
 import {AccountsCollection} from '/collections/AccountsCollection.js';
 
-if (Meteor.isServer) {
-  const ACCOUNT_NUMBER = 'XX1234';
+const ACCOUNT_NUMBER = 'XX1234';
 
+if (Meteor.isServer) {
   describe('AccountsCollection', function() {
     describe('Methods', function() {
       beforeEach(function() {
@@ -41,7 +41,7 @@ if (Meteor.isServer) {
             createdAt: new Date(),
             balance: 100,
           });
-        }).to.throw('E11000 duplicate key error collection: meteor.accounts index: ' + 
+        }).to.throw('E11000 duplicate key error collection: meteor.accounts index: ' +
           'accountNumber_1 dup key: { : "XX1234" }');
       });
     });
@@ -49,33 +49,7 @@ if (Meteor.isServer) {
 
   describe('Account Assets', function() {
     beforeEach(function() {
-      AccountsCollection.remove({});
-      AccountsCollection.insert({
-        accountNumber: ACCOUNT_NUMBER,
-        createdAt: new Date(),
-        balance: 100,
-        assets: [
-          {
-            symbol: 'IBM',
-            numUnits: 1000,
-            purchaseDate: '2015-01-01',
-            unitPrice: 150.00,
-          },
-          {
-            symbol: 'IBM',
-            numUnits: 1000,
-            purchaseDate: '2015-01-01',
-            unitPrice: 150.00,
-          },
-          {
-            symbol: 'APL',
-            numUnits: 200,
-            purchaseDate: '2015-06-01',
-            unitPrice: 65.00,
-          },
-        ],
-
-      });
+      addTestAssets();
     });
 
     afterEach(function() {
@@ -84,10 +58,60 @@ if (Meteor.isServer) {
 
     it('are saved and retrieved', () => {
       const account = AccountsCollection.findOne({accountNumber: ACCOUNT_NUMBER});
-      expect(account).to.not.be.null;
+      assert.notEqual(account, null);
       assert.equal(account.accountNumber, ACCOUNT_NUMBER);
       assert.equal(account.assets.length, 3);
     });
 
+    it('can add new asset to an acount', () => {
+      const account = AccountsCollection.findOne({accountNumber: ACCOUNT_NUMBER});
+      account.assets.push(
+        {
+          symbol: 'MSFT',
+          
+        }
+      );
+    });
+  });
+
+  describe('Asset transactions', () => {
+    let testAccount = null;
+
+    beforeEach(function() {
+      addTestAssets();
+      testAccount = AccountsCollection.findOne({accountNumber: ACCOUNT_NUMBER});
+    });
+  });
+}
+
+/**
+ * Add sample account assets
+**/
+function addTestAssets() {
+  AccountsCollection.remove({});
+  AccountsCollection.insert({
+    accountNumber: ACCOUNT_NUMBER,
+    createdAt: new Date(),
+    balance: 100,
+    assets: [
+      {
+        symbol: 'IBM',
+        numUnits: 1000,
+        purchaseDate: '2015-01-01',
+        unitPrice: 150.00,
+      },
+      {
+        symbol: 'CSCO',
+        numUnits: 300,
+        purchaseDate: '2015-01-01',
+        unitPrice: 150.00,
+      },
+      {
+        symbol: 'APL',
+        numUnits: 200,
+        purchaseDate: '2015-06-01',
+        unitPrice: 65.00,
+      },
+    ],
   });
 }
