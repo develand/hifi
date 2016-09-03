@@ -8,11 +8,9 @@ import Account from '../components/Account.jsx';
 import AccountsQuickEntry from '../components/AccountsQuickEntry.jsx';
 import {IntlProvider} from 'react-intl';
 import {AccountsCollection} from '/collections/AccountsCollection.js';
-import TestUtils from 'react-addons-test-utils';
 import '/factories/account.js';
 
 if (Meteor.isClient) {
-  
   describe('Accounts Container', () => {
     const ACCOUNT_NUMBER = 'XX1234';
     const NEW_ACCOUNT_NUMBER = 'NewAccount';
@@ -20,7 +18,7 @@ if (Meteor.isClient) {
     let accountsContainerElem = null;
 
     beforeEach(() => {
-      const accounts = [
+      accounts = [
         {
           _id: 1,
           accountNumber: ACCOUNT_NUMBER,
@@ -48,41 +46,40 @@ if (Meteor.isClient) {
 
     describe('Methods', () => {
       it('adds a new account to the list when one is submitted', () => {
-
         const accountsQuickEntryElem = accountsContainerElem.find(AccountsQuickEntry);
         const formElem = accountsQuickEntryElem.find('form');
-  
+
         expect(formElem).to.not.be.null;
 
         const inputElem = formElem.find('input');
         inputElem.get(0).value = NEW_ACCOUNT_NUMBER;
 
         formElem.simulate('submit', function() {
-          const accountsListElem = accountsContainerElem.find('AccountsList').first();   
-          expect(accountsListElem.find(Account)).to.have.length(2);       
+          const accountsListElem = accountsContainerElem.find('AccountsList').first();
+          expect(accountsListElem.find(Account)).to.have.length(2);
         });
       });
 
       it('changes an accounts "selected" attribute to true when its checkbox is checked', () => {
-          const accountsListElem = accountsContainerElem.find('AccountsList').first();   
-          const grid = accountsListElem.find(Grid);
-          checkElem = grid.find(Row).at(0)
-          checkElem.simulate('click', () => {
-            const account = AccountsCollection.find({accountNumber: ACCOUNT_NUMBER});
-            expect(account.selected).to.equal(true);
-          });
+        const accountsListElem = accountsContainerElem.find('AccountsList').first();
+        const grid = accountsListElem.find(Grid);
+        checkElem = grid.find(Row).at(0);
+        checkElem.simulate('click', () => {
+          const account = AccountsCollection.find({accountNumber: ACCOUNT_NUMBER});
+          expect(account.selected).to.equal(true);
+        });
       });
 
       it('changes an accounts "selected" attribute back to false when clicked twice', () => {
-          const accountsListElem = accountsContainerElem.find('AccountsList').first();   
-          const grid = accountsListElem.find(Grid);
-          checkElem = grid.find(Row).at(0)
+        const accountsListElem = accountsContainerElem.find('AccountsList').first();
+        const grid = accountsListElem.find(Grid);
+        checkElem = grid.find(Row).at(0);
+        checkElem.simulate('click', () => {
           checkElem.simulate('click', () => {
-            checkElem.simulate('click', () => {
-              const account = AccountsCollection.find({accountNumber: ACCOUNT_NUMBER});
-              expect(account.selected).to.equal(false);
-            });
+            const account = AccountsCollection.find({accountNumber: ACCOUNT_NUMBER});
+            expect(account.selected).to.equal(false);
           });
+        });
       });
     });
   });

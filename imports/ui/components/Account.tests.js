@@ -10,7 +10,6 @@ import {IntlProvider} from 'react-intl';
 
 if (Meteor.isClient) {
   describe('Account', () => {
-
     let account = null;
     let accountElem = null;
     let onDeleteAccount = sinon.spy();
@@ -20,7 +19,9 @@ if (Meteor.isClient) {
       account = Factory.build('account');
       accountElem = mount(
         <IntlProvider locale="en">
-          <Account account={account} onDeleteAccount={onDeleteAccount} onSelectAccount={onSelectAccount} />
+          <Account account={account}
+            onDeleteAccount={onDeleteAccount}
+            onSelectAccount={onSelectAccount} />
         </IntlProvider>
       );
     });
@@ -36,7 +37,7 @@ if (Meteor.isClient) {
       });
     });
 
-    describe("Account Actions", () => {
+    describe('Account Actions', () => {
       it('passes the account primary key to onDeleteAccount', () => {
         const buttonElem = accountElem.find('button').first();
         buttonElem.simulate('click');

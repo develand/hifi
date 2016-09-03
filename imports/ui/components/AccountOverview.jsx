@@ -1,8 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import {AccountsCollection} from '/collections/AccountsCollection.js';
-import Account from './Account.jsx'
 import {Grid, Row, Col} from 'react-bootstrap';
-import {FormattedNumber} from 'react-intl';
 
 // Task component - represents a single todo item
 export default class AccountOverview extends Component {
@@ -12,8 +9,8 @@ export default class AccountOverview extends Component {
       <Row>
         <Col md={4} xs={4}>Account</Col>
         <Col md={4} xs={4}><span className="pull-right">Balance</span></Col>
-      </Row>        
-    );       
+      </Row>
+    );
   }
 
   renderAccounts() {
@@ -21,8 +18,8 @@ export default class AccountOverview extends Component {
       <Row key={account._id}>
         <Col md={4} xs={4}>{account.accountNumber}</Col>
         <Col md={4} xs={4}><span className="pull-right">{account.balance}</span></Col>
-      </Row>        
-    ));       
+      </Row>
+    ));
   }
 
   render() {

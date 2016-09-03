@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { createContainer } from 'meteor/react-meteor-data';
 import { AccountsCollection } from '/collections/AccountsCollection.js';
-import {Panel, Tabs, Tab} from 'react-bootstrap'; 
-import AccountOverview from '../components/AccountOverview.jsx'
+import {Panel, Tabs, Tab} from 'react-bootstrap';
+import AccountOverview from '../components/AccountOverview.jsx';
 
 export default class FinanceDetailContainer extends Component {
 
@@ -15,7 +14,7 @@ export default class FinanceDetailContainer extends Component {
             <AccountOverview accounts={this.props.accounts} />
           </Tab>
           <Tab eventKey={2} title="Trends">Trends</Tab>
-        </Tabs>  
+        </Tabs>
       </Panel>
     );
   }

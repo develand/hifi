@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import {AccountsCollection} from '/collections/AccountsCollection.js';
 import {Row, Col} from 'react-bootstrap';
 import {FormattedNumber} from 'react-intl';
 
@@ -32,12 +31,10 @@ export default class Account extends Component {
   }
 
   deleteThisAccount() {
-    console.log("calling delete with: " + this.props.account._id);
     this.props.onDeleteAccount(this.props.account._id);
   }
 
   toggleChecked() {
-    console.log("checked");
     this.props.onSelectAccount(this.props.account.checked);
   }
 }

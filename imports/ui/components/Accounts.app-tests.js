@@ -2,16 +2,13 @@ import '/factories/account.js';
 
 describe('Account', () => {
   describe('Creation', () => {
-    let account = null;
-    let onDeleteAccount = sinon.spy();
-    let onSelectAccount = sinon.spy();
+    // let account = null;
 
     beforeEach(() => {
-      account = Factory.create('accounts');
+      // account = Factory.create('accounts');
     });
-    
-    it("saves a valid account", () => {
-  
+
+    it('saves a valid account', () => {
     });
   });
 
