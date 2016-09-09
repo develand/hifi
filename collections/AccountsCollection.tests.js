@@ -45,41 +45,199 @@ if (Meteor.isServer) {
           'accountNumber_1 dup key: { : "XX1234" }');
       });
     });
-  });
 
-  describe('Account Assets', function() {
-    beforeEach(function() {
-      addTestAssets();
+    describe('Account Assets', function() {
+      beforeEach(function() {
+        addTestAssets();
+      });
+
+      afterEach(function() {
+        AccountsCollection.remove({accountNumber: ACCOUNT_NUMBER});
+      });
+
+      it('are saved and retrieved', () => {
+        const account = AccountsCollection.findOne({accountNumber: ACCOUNT_NUMBER});
+        assert.notEqual(account, null);
+        assert.equal(account.accountNumber, ACCOUNT_NUMBER);
+        assert.equal(account.assets.length, 3);
+      });
+
+      it('can add new asset to an acount', () => {
+        const account = AccountsCollection.findOne({accountNumber: ACCOUNT_NUMBER});
+        account.assets.push(
+          {
+            symbol: 'MSFT',
+          }
+        );
+      });
     });
 
-    afterEach(function() {
-      AccountsCollection.remove({accountNumber: ACCOUNT_NUMBER});
+    describe('Validation', () => {
+      it('requires that an account number be provided', () => {
+        expect(function() {
+          AccountsCollection.insert({
+            createdAt: new Date(),
+            balance: 100,
+          });
+        }).to.throw('Account number is required');
+      });
+
+      it('requires that a balance be provided', () => {
+        expect(function() {
+          AccountsCollection.insert({
+            accountNumber: ACCOUNT_NUMBER,
+            createdAt: new Date(),
+          });
+        }).to.throw('Balance is required');
+      });
+
+      it('it properly saves a createdAt date if passed', () => {
+        AccountsCollection.insert({
+          accountNumber: ACCOUNT_NUMBER,
+          createdAt: '2001-01-01',
+          balance: 100,
+        }, function() {
+          const account = AccountsCollection.findOne({accountNumber: ACCOUNT_NUMBER});
+          assert.equal(account.createdDate, '2001-01-01');
+        });
+      });
+
+      it('it sets a default createdAt date if one is not passed', () => {
+        AccountsCollection.insert({
+          accountNumber: ACCOUNT_NUMBER,
+          balance: 100,
+        }, function() {
+          const account = AccountsCollection.findOne({accountNumber: ACCOUNT_NUMBER});
+          assert.notEqual(account.createdDate, null);
+        });
+      });
+
+      it('prevents the entry of a negative asset unit price', () => {
+        expect(function() {
+          AccountsCollection.insert({
+            accountNumber: ACCOUNT_NUMBER,
+            createdAt: new Date(),
+            balance: 100,
+            assets: [
+              {
+                symbol: 'IBM',
+                numUnits: 1000,
+                purchaseDate: '2015-01-01',
+                unitPrice: 0.00,
+              },
+            ],
+          });
+        }).to.throw('Unit price must be at least 0.01');
+      });
+
+      it('requires that an asset symbol be provided', () => {
+        expect(function() {
+          AccountsCollection.insert({
+            accountNumber: ACCOUNT_NUMBER,
+            balance: 100.0,
+            assets: [
+              {
+                numUnits: 1.0,
+                unitPrice: 100.0,
+              },
+            ],
+          });
+        }).to.throw('Symbol is required');
+      });
+
+      it('requires that asset numUnits be provided', () => {
+        expect(function() {
+          AccountsCollection.insert({
+            accountNumber: ACCOUNT_NUMBER,
+            balance: 100.0,
+            assets: [
+              {
+                symbol: 'IBM',
+                unitPrice: 100.0,
+              },
+            ],
+          });
+        }).to.throw('Number of Units is required');
+      });
+
+      it('requires that asset unit price be provided', () => {
+        expect(function() {
+          AccountsCollection.insert({
+            accountNumber: ACCOUNT_NUMBER,
+            balance: 100.0,
+            assets: [
+              {
+                symbol: 'IBM',
+                numUnits: 1.0,
+                balance: 100.0,
+              },
+            ],
+          });
+        }).to.throw('Unit price is required');
+      });
+
+      it('it sets a default asset purchase date if one is not passed', () => {
+        AccountsCollection.insert({
+          accountNumber: ACCOUNT_NUMBER,
+          balance: 100,
+          assets: [
+            {
+              symbol: 'IBM',
+              numUnits: 1.0,
+              balance: 100.0,
+              unitPrice: 100.0,
+            },
+          ],
+        }, function() {
+          const account = AccountsCollection.findOne({accountNumber: ACCOUNT_NUMBER});
+          assert.notEqual(account.assets[0].createdDate, null);
+        });
+      });
+
+      it('it persists an asset purchase date if one is passed', () => {
+        AccountsCollection.insert({
+          accountNumber: ACCOUNT_NUMBER,
+          balance: 100,
+          assets: [
+            {
+              symbol: 'IBM',
+              numUnits: 1.0,
+              balance: 100.0,
+              unitPrice: 100.0,
+              purchaseDate: '2001-01-01',
+            },
+          ],
+        }, function() {
+          const account = AccountsCollection.findOne({accountNumber: ACCOUNT_NUMBER});
+          assert.equals(account.assets[0].createdDate, '2001-01-01');
+        });
+      });
     });
 
-    it('are saved and retrieved', () => {
-      const account = AccountsCollection.findOne({accountNumber: ACCOUNT_NUMBER});
-      assert.notEqual(account, null);
-      assert.equal(account.accountNumber, ACCOUNT_NUMBER);
-      assert.equal(account.assets.length, 3);
-    });
 
-    it('can add new asset to an acount', () => {
-      const account = AccountsCollection.findOne({accountNumber: ACCOUNT_NUMBER});
-      account.assets.push(
-        {
-          symbol: 'MSFT',
-          
-        }
-      );
-    });
-  });
+      //   symbol: {
+      //   type: String,
+      // },
+      // numUnits: {
+      //   type: Number,
+      //   min: 0.01,
+      // },
+      // purchaseDate: {
+      //   type: Date,
+      //   defaultValue: new Date(),
+      // },
+      // unitPrice: {
+      //   type: Number,
+      //   min: 0.01,
+      // },
 
-  describe('Asset transactions', () => {
-    let testAccount = null;
+    describe('Asset transactions', () => {
+      let testAccount = null;
 
-    beforeEach(function() {
-      addTestAssets();
-      testAccount = AccountsCollection.findOne({accountNumber: ACCOUNT_NUMBER});
+      beforeEach(function() {
+        addTestAssets();
+        testAccount = AccountsCollection.findOne({accountNumber: ACCOUNT_NUMBER});
+      });
     });
   });
 }

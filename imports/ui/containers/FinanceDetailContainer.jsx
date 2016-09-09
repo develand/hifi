@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { AccountsCollection } from '/collections/AccountsCollection.js';
+import {AccountsCollection} from '/collections/AccountsCollection.js';
 import {Panel, Tabs, Tab} from 'react-bootstrap';
 import AccountOverview from '../components/AccountOverview.jsx';
+import PositionsList from '../components/PositionsList.jsx';
 
 export default class FinanceDetailContainer extends Component {
 
@@ -14,6 +15,9 @@ export default class FinanceDetailContainer extends Component {
             <AccountOverview accounts={this.props.accounts} />
           </Tab>
           <Tab eventKey={2} title="Trends">Trends</Tab>
+          <Tab eventKey={3} title="Positions">
+            <PositionsList accountsCollection={AccountsCollection} />
+          </Tab>
         </Tabs>
       </Panel>
     );
@@ -28,12 +32,3 @@ FinanceDetailContainer.propTypes = {
   accounts: PropTypes.array.isRequired,
 };
 
-// export default AccountsDataContainer = createContainer(() => {
-//   const accountsHandle = Meteor.subscribe('accounts');
-//   const isLoading = accountsHandle.ready();
-//   const accountsExist = !isLoading;
-
-//   return {
-//     accounts: accountsExist ? AccountsCollection.find({}, {sort: {createdAt: -1}}).fetch() : [],
-//   };
-// }, FinanceDetailContainer);

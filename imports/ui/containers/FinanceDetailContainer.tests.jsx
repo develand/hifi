@@ -45,12 +45,15 @@ if (Meteor.isClient) {
 
       it('Contains an Overview subtab', () => {
         expect(tabs.find(Tab).at(0).node.props.title).to.equal('Overview');
-        // expect(tabs.find(Tab).at(0).text()).to.equal('Overview');
       });
 
       it('Contains a Trends subtab', () => {
         expect(tabs.find(Tab).at(1).node.props.title).to.equal('Trends');
         expect(tabs.find(Tab).at(1).text()).to.equal('Trends');
+      });
+
+      it('Contains a Positions subtab', () => {
+        expect(tabs.find(Tab).at(2).node.props.title).to.equal('Positions');
       });
     });
   });

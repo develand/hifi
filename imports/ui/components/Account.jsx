@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import {Row, Col} from 'react-bootstrap';
 import {FormattedNumber} from 'react-intl';
 
-// Task component - represents a single todo item
+// Account component - represents a single account
 export default class Account extends Component {
 
   render() {

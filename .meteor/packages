@@ -25,3 +25,5 @@ practicalmeteor:mocha
 fourseven:scss
 shell-server
 aldeed:simple-schema
+aldeed:collection2
+utilities:meteor-griddle
