@@ -4,7 +4,7 @@ import FinanceDetailContainer from '../containers/FinanceDetailContainer.jsx';
 import { IntlProvider } from 'react-intl';
 import { createContainer } from 'meteor/react-meteor-data';
 import NavigationBar from '../components/NavigationBar.jsx';
-import {Grid, Row, Col} from 'react-bootstrap';
+import {Grid,Row, Col} from 'react-bootstrap';
 import {AccountsCollection} from '/collections/AccountsCollection.js';
 
 // App component - represents the whole app
