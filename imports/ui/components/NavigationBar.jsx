@@ -13,7 +13,7 @@ export default class NavigationBar extends Component {
         		</Navbar.Brand>
         	</Navbar.Header>
             <Navbar.Collapse>
-              <Nav bsStyle="pills" className="load-test-data"
+              <Nav className="load-test-data"
                 onSelect={this.handleSelect.bind(this)}>
                 <NavItem eventKey={1} href="#">Overview</NavItem>
                 <NavItem eventKey={2} href="#">Future Look</NavItem>
