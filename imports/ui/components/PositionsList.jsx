@@ -6,9 +6,13 @@ export default class PositionsList extends Component {
 
   render() {
     return (
+        <
         <MeteorGriddle
+            tableClassName='table'
             collection={this.props.accountsCollection}
             publication='accounts'
+            showFilter={true}
+            showSettings={true}
             columns={['accountNumber', 'balance']}
         />
     );
